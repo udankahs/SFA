@@ -32,12 +32,13 @@ public class GetFieldsAcceble extends SFASuperTestNG {
 
 		String uname = ExcelLib.getCellValue(dataSheetPath, sheetName, 1, 0);
 		String password = ExcelLib.getCellValue(dataSheetPath, sheetName, 1, 1);
+		String environment = ExcelLib.getCellValue(dataSheetPath, sheetName, 1, 4);
 		String URL = "https://test.salesforce.com";
-		if (ExcelLib.getCellValue(dataSheetPath, sheetName, 1, 4).equals("Sandbox"))
+		if (environment.equalsIgnoreCase("Sandbox"))
 		{
 			URL="https://test.salesforce.com";
 		}
-		else if (ExcelLib.getCellValue(dataSheetPath, sheetName, 1, 4).equals("Production"))
+		else if (environment.equalsIgnoreCase("Production"))
 		{
 			URL="https://login.salesforce.com";
 		}
@@ -67,7 +68,7 @@ public class GetFieldsAcceble extends SFASuperTestNG {
 					baselineSheetPath = decodedPath + "Baseline Data/Baseline Excel_" + obj + ".xls";
 
 					if (ExcelLib.isFileExists(decodedPath + "/Baseline Data/", "Baseline Excel_" + obj + ".xls")) {
-						fieldAccebility.getFieldAaccebilty(obj, dataSheetPath, baselineSheetPath);
+						fieldAccebility.getFieldAaccebilty(obj, dataSheetPath, baselineSheetPath, environment);
 
 					} else {
 

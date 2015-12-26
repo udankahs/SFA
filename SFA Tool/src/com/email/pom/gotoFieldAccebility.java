@@ -56,6 +56,7 @@ public class gotoFieldAccebility {
 	String BaselineProfile = null;
 	String SourceState = null;
 	String Result, Color = null;
+	String partialXpath = "//th";
 
 	int baselineProfileIndex = 0;
 	int noOfColumnsInBaselineSheet = 0;
@@ -101,8 +102,14 @@ public class gotoFieldAccebility {
 		return validObject;
 	}
 
-	public void getFieldAaccebilty(String obj, String dataSheetPath, String baselineSheetPath)
+	public void getFieldAaccebilty(String obj, String dataSheetPath, String baselineSheetPath, String Environment)
 			throws InterruptedException, InvalidFormatException, FileNotFoundException, IOException {
+
+		if (Environment.equalsIgnoreCase("Production")) {
+			partialXpath = "//div[@style='display: block;']//th";
+		} else if (Environment.equalsIgnoreCase("Sandbox")) {
+			partialXpath = "//th";
+		}
 
 		int recTypeCount = ExcelLib.getRowCountofColumn(dataSheetPath, obj, 0);
 		Reporter.log("<table>", true);
@@ -115,8 +122,8 @@ public class gotoFieldAccebility {
 				new Select(RecordType).selectByVisibleText(rcdType);
 				Thread.sleep(5000);
 
-				noOfColumnsInBaselineSheet = WorkbookFactory.create(new FileInputStream(baselineSheetPath)).getSheet(rcdType).getRow(0)
-						.getPhysicalNumberOfCells();
+				noOfColumnsInBaselineSheet = WorkbookFactory.create(new FileInputStream(baselineSheetPath))
+						.getSheet(rcdType).getRow(0).getPhysicalNumberOfCells();
 				int profileCount = ExcelLib.getRowCountofColumn(dataSheetPath, obj, 1);
 				for (int k = 1; k < profileCount; k++) {
 
@@ -151,20 +158,11 @@ public class gotoFieldAccebility {
 								for (int j = 1; j < fieldCount; j++) {
 									field = ExcelLib.getCellValue(baselineSheetPath, rcdType, j, 0);
 									try {
-										String xpath=null;
-										driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-										boolean DevEdition = driver.findElements(By.xpath("//title[contains(text(),'Developer Edition')]")).size() > 0;
-										driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-										if (DevEdition)
-										{
-											xpath="//div[@style='display: block;']//th[text()='" + field + "']/../td[" + profileIndex + "]/a";
-										}
-										else{
-											xpath="//th[text()='" + field + "']/../td[" + profileIndex + "]/a";
-										}
-									
-										targetState = driver.findElement(By.xpath(xpath)).getText();
 
+										String xpath= partialXpath + "[text()='" + field	+ "']/../td[" + profileIndex + "]/a";
+										System.out.println(xpath);
+										targetState = driver.findElement(By.xpath(xpath)).getText();
+										
 										SourceState = ExcelLib.getCellValue(baselineSheetPath, rcdType, j,
 												baselineProfileIndex);
 										if (SourceState.equals(targetState)) {
@@ -191,8 +189,9 @@ public class gotoFieldAccebility {
 
 								Reporter.log("</tr></table></br>");
 
-								Reporter.log("<table><tr><th bgcolor='green' >Pass Count : " + passCount + "</th><th bgcolor='red'>Fail Count : "
-										+ failCount + "</th></tr></table></br>");
+								Reporter.log("<table><tr><th bgcolor='green' >Pass Count : " + passCount
+										+ "</th><th bgcolor='red'>Fail Count : " + failCount
+										+ "</th></tr></table></br>");
 
 							} catch (NullPointerException e) {
 								Reporter.log("", true);
@@ -208,8 +207,8 @@ public class gotoFieldAccebility {
 
 					else {
 						Reporter.log("", true);
-						Reporter.log("<table><tr><th><font color='red'><b>ERROR: </b></th><td> Profile ("
-								+ profile + ") not found in the Application </td></tr></table>", true);
+						Reporter.log("<table><tr><th><font color='red'><b>ERROR: </b></th><td> Profile (" + profile
+								+ ") not found in the Application </td></tr></table>", true);
 						Reporter.log("</td></tr></table>", true);
 
 					}
@@ -217,8 +216,8 @@ public class gotoFieldAccebility {
 
 			} catch (NoSuchElementException e) {
 				Reporter.log("", true);
-				Reporter.log("<table><tr><th><font color='red'><b>ERROR: </b></th><td> Record Type ("
-						+ rcdType + ") not found in the Application </td></tr></table></br>", true);
+				Reporter.log("<table><tr><th><font color='red'><b>ERROR: </b></th><td> Record Type (" + rcdType
+						+ ") not found in the Application </td></tr></table></br>", true);
 				Reporter.log("</td></tr></table>", true);
 			}
 		}
