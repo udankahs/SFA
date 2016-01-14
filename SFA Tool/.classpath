@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/dom4j.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/junit-4.11.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/poi-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/poi-examples-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/poi-excelant-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/poi-ooxml-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/poi-ooxml-schemas-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/poi-scratchpad-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/selenium-server-standalone-2.48.2.jar"/>
-	<classpathentry kind="lib" path="E:/Selenium/Jar File/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/selenium-server-standalone-2.48.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/poi-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/poi-ooxml-schemas-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/poi-ooxml-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="C:/Users/266241/workspace/Jar File/poi-scratchpad-3.13-20150929.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

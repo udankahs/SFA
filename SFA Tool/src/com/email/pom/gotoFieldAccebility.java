@@ -37,6 +37,12 @@ public class gotoFieldAccebility {
 	@FindBy(xpath = "//div[@id='userNav-menuItems']/a[contains (text(), 'Setup')]")
 	private WebElement Setup2;
 
+	@FindBy(id = "globalHeaderNameMink")
+	private WebElement communityUserNav;
+	
+	@FindBy(xpath = "//a[contains (text(), 'Setup')]")
+	private WebElement Setup3;
+	
 	@FindBy(id = "Security_icon")
 	private WebElement Security;
 
@@ -68,15 +74,19 @@ public class gotoFieldAccebility {
 	}
 
 	public void gotoFieldAaccebilty() {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		boolean setupLinkExists = driver.findElements(By.id("setupLink")).size() > 0;
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		if (setupLinkExists) {
+		
+		if (driver.findElements(By.id("setupLink")).size() > 0) {
 			Setup.click();
-		} else {
+		} 
+		else if (driver.findElements(By.id("userNavLabel")).size() > 0)
+		{
 			UserName.click();
 			Setup2.click();
+		}
+		else
+		{
+			communityUserNav.click();
+			Setup3.click();
 		}
 
 		Security.click();
